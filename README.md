@@ -16,6 +16,20 @@ brew install shivammathur/php/php@8.3
 brew link --force --overwrite shivammathur/php/php@8.3
 ```
 
+### PHP の拡張機能のインストール
+
+[shivammathur/homebrew-extensions: :beers: Homebrew tap for PHP extensions](https://github.com/shivammathur/homebrew-extensions?tab=readme-ov-file#install-php-extensions)
+
+```bash
+brew tap shivammathur/extensions
+```
+
+#### コードのカバレッジをローカルで取得したい場合必要
+
+```bash
+brew install shivammathur/extensions/pcov@8.3
+```
+
 ### Composer のインストール
 
 ```bash
