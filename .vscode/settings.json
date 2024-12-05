@@ -22,5 +22,6 @@
     "files.trimTrailingWhitespace": false
   },
   "explorer.fileNesting.enabled": true,
-  "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer"
+  "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+  "phpstan.memoryLimit": "2G"
 }

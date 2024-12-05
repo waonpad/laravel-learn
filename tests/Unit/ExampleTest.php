@@ -16,6 +16,7 @@ final class ExampleTest extends TestCase
      */
     public function testThatTrueIsTrue(): void
     {
+        // @phpstan-ignore staticMethod.alreadyNarrowedType
         self::assertTrue(true);
     }
 }
