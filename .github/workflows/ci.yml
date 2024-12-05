@@ -18,6 +18,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version-file: ".php-version"
+          # カバレッジ取るために必要
           extensions: pcov
 
       - name: Install dependencies
@@ -37,7 +38,7 @@ jobs:
         continue-on-error: true
         run: composer format
 
-      # PRにフォーマットの修正を提案する
+      # フォーマットの修正をコメントする
       - name: Suggest Fixes
         uses: reviewdog/action-suggester@v1
         with:
@@ -48,6 +49,7 @@ jobs:
         continue-on-error: true
         run: composer test --coverage-clover coverage.xml
 
+      # テストカバレッジをコメントする
       - name: Run Test Coverage Report
         uses: k1LoW/octocov-action@v0
 
