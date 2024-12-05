@@ -21,7 +21,7 @@ pre-commit:
     format:
       glob: "*.php"
       run: |
-        composer format {staged_files}
+        composer format --config .php-cs-fixer.dist.php {staged_files}
       stage_fixed: true
       skip:
         - merge
