@@ -1,9 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExampleController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', static function () {
-    return response()->json([
-        'hello' => 'world',
-    ]);
-});
+Route::get('/', [ExampleController::class, 'index']);

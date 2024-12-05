@@ -59,3 +59,5 @@ brew install lefthook && lefthook install
 ```bash
 composer dev
 ```
+
+本番環境では`php artisan serve`ではなく`php artisan octane:start`を使用する。
