@@ -18,6 +18,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version-file: ".php-version"
+          extensions: pcov
 
       - name: Install dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -45,35 +46,10 @@ jobs:
       - name: Run Tests
         id: test
         continue-on-error: true
-        run: composer test --coverage-text --colors=never > storage/logs/coverage.log
+        run: composer test --coverage-clover coverage.xml
 
-      # テストカバレッジをPRにコメントする
-      # https://zenn.dev/ysit/articles/github-actions-test-summary
-
-      - name: Cat Test Result
-        run: |
-          cat storage/logs/coverage.log
-        if: ${{ failure() }}
-
-      - name: Sed Coverage Report
-        run: |
-          sed -E "s/"$'\E'"\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" | \
-          grep "Code Coverage Report:" -A6 storage/logs/coverage.log | sed -e "s/^ *//" | sed -e "s/ *$//" | sed -e "/^ *$/d" > storage/logs/coverage-summary.log
-
-      - name: Read coverage summary
-        id: coverage-summary
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: storage/logs/coverage-summary.log
-
-      - name: Comment Coverage Summary
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          header: coverage-summary
-          message: |
-            ## Coverage Summary
-            ${{ steps.coverage-summary.outputs.content }}
+      - name: Run Test Coverage Report
+        uses: k1LoW/octocov-action@v0
 
       - name: Error Handling
         if: steps.format.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.test.outcome == 'failure'
