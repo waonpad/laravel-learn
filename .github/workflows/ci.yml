@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  uv-example:
-    name: python
+  laravel:
+    name: laravel
     runs-on: ubuntu-latest
 
     steps:
@@ -25,6 +25,7 @@ jobs:
       - name: Setup Laravel
         run: composer run post-root-package-install && composer run post-create-project-cmd
 
+      # 自動で Files changed にアノテーションされる
       - name: Run Lint
         id: lint
         continue-on-error: true
@@ -35,6 +36,7 @@ jobs:
         continue-on-error: true
         run: composer format
 
+      # PRにフォーマットの修正を提案する
       - name: Suggest Fixes
         uses: reviewdog/action-suggester@v1
         with:
@@ -42,7 +44,35 @@ jobs:
 
       - name: Run Tests
         id: test
-        run: composer test
+        run: composer test --coverage-text --colors=never > storage/logs/coverage.log
+
+      # テストカバレッジをPRにコメントする
+      # https://zenn.dev/ysit/articles/github-actions-test-summary
+
+      - name: Cat Test Result
+        run: |
+          cat storage/logs/coverage.log
+        if: ${{ failure() }}
+
+      - name: Sed Coverage Report
+        run: |
+          sed -E "s/"$'\E'"\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" | \
+          grep "Code Coverage Report:" -A6 storage/logs/coverage.log | sed -e "s/^ *//" | sed -e "s/ *$//" | sed -e "/^ *$/d" > storage/logs/coverage-summary.log
+
+      - name: Read coverage summary
+        id: coverage-summary
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: storage/logs/coverage-summary.log
+
+      - name: Comment Coverage Summary
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          header: coverage-summary
+          message: |
+            ## Coverage Summary
+            ${{ steps.coverage-summary.outputs.content }}
 
       - name: Error Handling
         if: steps.format.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.test.outcome == 'failure'
