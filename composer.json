@@ -63,7 +63,10 @@
             "./vendor/bin/php-cs-fixer fix"
         ],
         "test": [
-            "@php artisan test"
+            "./vendor/bin/phpunit"
+        ],
+        "test:coverage": [
+            "./vendor/bin/phpunit --coverage-clover coverage.xml"
         ]
     },
     "extra": {
