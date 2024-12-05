@@ -34,6 +34,12 @@ composer install
 composer run post-root-package-install && composer run post-create-project-cmd
 ```
 
+### Git Hooks の設定
+
+```bash
+brew install lefthook && lefthook install
+```
+
 ## サーバーの起動
 
 ```bash
