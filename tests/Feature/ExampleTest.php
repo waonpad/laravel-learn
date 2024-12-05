@@ -6,14 +6,20 @@ namespace Tests\Feature;
 use Tests\TestCase;
 
 /**
- * @internal
+ * @coversDefaultClass \App\Http\Controllers\ExampleController
  *
- * @coversNothing
+ * @covers \App\Http\Controllers\ExampleController
+ *
+ * @internal
  */
 final class ExampleTest extends TestCase
 {
     /**
      * A basic test example.
+     *
+     * @test
+     *
+     * @covers ::index
      */
     public function testTheApplicationReturnsASuccessfulResponse(): void
     {
