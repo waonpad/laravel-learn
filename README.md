@@ -2,12 +2,6 @@
 
 ## セットアップ
 
-### .env ファイルの作成
-
-```bash
-cp -n .env.example .env
-```
-
 ### PHP のインストール
 
 [shivammathur/homebrew-php: :beer: Homebrew tap for PHP 5.6 to 8.4. PHP 8.4 is built nightly.](https://github.com/shivammathur/homebrew-php)
@@ -34,20 +28,14 @@ brew install composer
 composer install
 ```
 
-### キーの生成
-
-```bash
-php artisan key:generate
-```
-
-### データベースマイグレーション
+### composer.jsonに定義したセットアップスクリプトを実行
   
 ```bash
-php artisan migrate
+composer run post-root-package-install && composer run post-create-project-cmd
 ```
 
 ## サーバーの起動
 
 ```bash
-php artisan serve
+composer dev
 ```
