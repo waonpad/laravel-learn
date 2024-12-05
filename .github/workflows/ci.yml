@@ -47,7 +47,7 @@ jobs:
       - name: Run Tests
         id: test
         continue-on-error: true
-        run: composer test --coverage-clover coverage.xml
+        run: composer test:coverage
 
       # テストカバレッジをコメントする
       - name: Run Test Coverage Report
