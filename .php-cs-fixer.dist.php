@@ -21,6 +21,6 @@ return (new Config())
             // __DIR__ . '/app',
             // ])
             ->in(__DIR__)
-            ->exclude(['vendor', 'var'])
+            ->exclude(['vendor', 'bootstrap/cache', 'storage'])
     )
 ;
