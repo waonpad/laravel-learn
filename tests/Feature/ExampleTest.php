@@ -17,8 +17,6 @@ final class ExampleTest extends TestCase
     /**
      * A basic test example.
      *
-     * @test
-     *
      * @covers ::index
      */
     public function testTheApplicationReturnsASuccessfulResponse(): void
