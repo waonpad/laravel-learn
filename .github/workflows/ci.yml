@@ -51,7 +51,7 @@ jobs:
 
       # テストカバレッジをコメントする
       - name: Run Test Coverage Report
-        uses: k1LoW/octocov-action@v0
+        uses: k1LoW/octocov-action@v1
 
       - name: Error Handling
         if: steps.format.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.test.outcome == 'failure'
