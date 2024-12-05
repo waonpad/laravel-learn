@@ -12,7 +12,6 @@ return (new Config())
     ->setRules([
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
-        'phpdoc_to_comment' => ['ignored_tags' => ['psalm-suppress']],
     ])
     ->setFinder(
         Finder::create()
