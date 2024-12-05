@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 
-class ExampleController
+class ExampleController extends Controller
 {
     /**
      * @return JsonResponse
