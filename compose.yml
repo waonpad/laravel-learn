@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - .:/workspace
+      - vendor-store:/workspace/vendor
+      - storage-store:/workspace/storage/framework
+      - node_modules-store:/workspace/node_modules
+    ports:
+      - 8000:8000
+    tty: true
+    stdin_open: true
+
+volumes:
+  vendor-store:
+  storage-store:
+  node_modules-store:
