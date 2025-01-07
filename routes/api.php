@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ExampleController::class, 'index']);
+
+Route::prefix('posts')->group(function (): void {
+    Route::get('/', [PostController::class, 'index']);
+    Route::post('/', [PostController::class, 'store'])->middleware('auth:sanctum');
+    Route::get('/{id}', [PostController::class, 'show']);
+    Route::patch('/{id}', [PostController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/{id}', [PostController::class, 'destroy'])->middleware('auth:sanctum');
+});
