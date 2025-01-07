@@ -26,4 +26,4 @@ RUN composer install --no-dev
 # init
 RUN composer run post-root-package-install && composer run post-create-project-cmd
 
-CMD [ "composer" "run" "start" ]
+CMD composer run start
