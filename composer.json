@@ -53,7 +53,7 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi",
-            "@php artisan octane:install --server=frankenphp"
+            "@php artisan octane:install --server=frankenphp -n"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",

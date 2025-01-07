@@ -31,7 +31,6 @@
 
   // Uncomment the next line to run commands after the container is created.
   // "postCreateCommand": "cat /etc/os-release",
-  "postCreateCommand": "lefthook install",
 
   // Configure tool-specific properties.
   // "customizations": {},
