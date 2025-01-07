@@ -5,6 +5,9 @@ WORKDIR /workspace
 ENV TZ Asia/Tokyo
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# create php.ini
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+
 # install dependencies
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \

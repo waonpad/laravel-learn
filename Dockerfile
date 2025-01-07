@@ -5,6 +5,9 @@ WORKDIR /workspace
 ENV TZ Asia/Tokyo
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# create php.ini
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
 # install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
