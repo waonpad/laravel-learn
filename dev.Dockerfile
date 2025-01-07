@@ -5,6 +5,9 @@ WORKDIR /workspace
 ENV TZ Asia/Tokyo
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# install composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 # create php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
@@ -20,12 +23,5 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     nodejs \
     npm \
     lefthook \
-    && docker-php-ext-install zip pcntl
-
-# install pcov
-RUN pecl install pcov && docker-php-ext-enable pcov
-
-# install composer
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-
-ENTRYPOINT []
+    && docker-php-ext-install zip pcntl \
+    && pecl install pcov && docker-php-ext-enable pcov
