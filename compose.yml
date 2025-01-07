@@ -12,6 +12,14 @@ services:
       - 8000:8000
     tty: true
     stdin_open: true
+    entrypoint: >
+      /bin/bash -c
+      "composer install
+      && npm install
+      && composer run post-root-package-install
+      && composer run post-create-project-cmd
+      && lefthook install
+      && /bin/bash"
     command: >
       /bin/bash -c
       "composer install
