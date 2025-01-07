@@ -19,9 +19,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        /** @var User $user */
+        $user = User::inRandomOrder()->first();
+
         return [
             'content' => fake()->sentence(),
-            'user_id' => User::factory(),
+            'user_id' => $user,
         ];
     }
 }
