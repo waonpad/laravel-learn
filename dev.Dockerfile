@@ -11,9 +11,9 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # create php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
+# install dependencies
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.deb.sh' | bash
 
-# install dependencies
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && apt-get install -y --no-install-recommends \
