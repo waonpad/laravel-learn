@@ -11,6 +11,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # create php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.deb.sh' | bash
+
 # install dependencies
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.deb.sh' | bash
 
