@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Post;
+namespace App\Http\Requests\Auth;
 
-use App\Http\DTO\Post\LoginDto;
+use App\Http\DTO\Auth\LoginDto;
 use App\Http\Requests\CustomFormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 
