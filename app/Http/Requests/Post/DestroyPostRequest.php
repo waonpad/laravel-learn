@@ -18,9 +18,7 @@ class DestroyPostRequest extends CustomFormRequest
     {
         $post = Post::findOrFail($this->route('id'));
 
-        Gate::forUser(auth('sanctum')->user())->authorize('delete', [Post::class, $post]);
-
-        return true;
+        return Gate::allows('delete', [Post::class, $post]);
     }
 
     /**

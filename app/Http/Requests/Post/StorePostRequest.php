@@ -18,9 +18,7 @@ class StorePostRequest extends CustomFormRequest
      */
     public function authorize(): bool
     {
-        Gate::forUser(auth('sanctum')->user())->authorize('create', [Post::class]);
-
-        return true;
+        return Gate::allows('create', [Post::class]);
     }
 
     /**

@@ -19,9 +19,7 @@ class UpdatePostRequest extends CustomFormRequest
     {
         $post = Post::findOrFail($this->route('id'));
 
-        Gate::forUser(auth('sanctum')->user())->authorize('update', [Post::class, $post]);
-
-        return true;
+        return Gate::allows('update', [Post::class, $post]);
     }
 
     /**
