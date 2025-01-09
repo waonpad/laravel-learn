@@ -7,7 +7,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "cweagans/composer-patches": "^1.7",
         "dedoc/scramble": "^0.11.32",
         "laravel/framework": "^11.31",
         "laravel/octane": "^2.6",
@@ -81,16 +80,13 @@
     "extra": {
         "laravel": {
             "dont-discover": []
-        },
-        "enable-patching": "true",
-        "composer-exit-on-patch-failure": "true"
+        }
     },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "cweagans/composer-patches": true,
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
