@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Exceptions\Handler;
+use App\Http\Middleware\RequireJson;
 use App\Http\Middleware\UnescapeJsonResponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(static function (Middleware $middleware) {
         $middleware->statefulApi();
         $middleware->append([
+            RequireJson::class,
             UnescapeJsonResponse::class,
         ]);
     })
