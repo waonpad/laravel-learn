@@ -8,6 +8,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 class CustomFormRequest extends FormRequest
 {
@@ -28,8 +29,9 @@ class CustomFormRequest extends FormRequest
     {
         // path内にエラーがある場合は、400でエラーを返す
         if ($validator->errors()->has('path.*')) {
-            $res = response()->json(
+            $res = new JsonResponse(
                 [
+                    'message' => 'Invalid path parameters',
                     'errors' => $validator->errors()->get('path.*'),
                 ],
                 400
@@ -40,8 +42,9 @@ class CustomFormRequest extends FormRequest
 
         // query内にエラーがある場合は、400でエラーを返す
         if ($validator->errors()->has('query.*')) {
-            $res = response()->json(
+            $res = new JsonResponse(
                 [
+                    'message' => 'Invalid query parameters',
                     'errors' => $validator->errors()->get('query.*'),
                 ],
                 400
@@ -51,8 +54,9 @@ class CustomFormRequest extends FormRequest
         }
 
         // そうでない場合(フォーム)は、422でエラーを返す
-        $res = response()->json(
+        $res = new JsonResponse(
             [
+                'message' => 'The given data was invalid.',
                 'errors' => $validator->errors(),
             ],
             422
