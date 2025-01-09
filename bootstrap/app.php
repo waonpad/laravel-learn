@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(static function (Middleware $middleware) {
+        $middleware->statefulApi();
         $middleware->append([
             RequireJson::class,
             UnescapeJsonResponse::class,
