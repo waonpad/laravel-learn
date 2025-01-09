@@ -22,8 +22,6 @@ class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * page: number をクエリパラメータとして受け取り、ページネーションを行う
      */
     public function index(IndexPostRequest $request, IndexPostAction $action): PostCollection
     {
@@ -39,6 +37,7 @@ class PostController extends Controller
 
         $stored = $action($input);
 
+        // @status 201
         return new PostResource($stored);
     }
 
