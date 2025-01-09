@@ -43,6 +43,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [ // 追加
+            'driver' => 'sanctum',
+            'provider' => 'users',
+        ],
     ],
 
     /*

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,11 @@ Route::prefix('posts')->group(function (): void {
     Route::get('/{id}', [PostController::class, 'show']);
     Route::patch('/{id}', [PostController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('/{id}', [PostController::class, 'destroy'])->middleware('auth:sanctum');
+});
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/user', [AuthController::class, 'user']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
