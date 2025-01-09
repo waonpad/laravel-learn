@@ -8,10 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class ExampleController extends Controller
 {
-    /**
-     * @return JsonResponse
-     */
-    public function index()
+    public function index(): JsonResponse
     {
         return new JsonResponse(['message' => 'Hello, World!']);
     }
