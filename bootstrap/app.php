@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Exceptions\Handler;
 use App\Http\Middleware\UnescapeJsonResponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,5 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             UnescapeJsonResponse::class,
         ]);
     })
-    ->withExceptions(static function (Exceptions $exceptions) {})->create()
+    ->withExceptions(static function (Exceptions $exceptions) {
+        (new Handler())->handleExceptions($exceptions);
+    })->create()
 ;
