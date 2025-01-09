@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Gate;
 
 class StorePostRequest extends CustomFormRequest
 {
-    protected $content;
-
     /**
      * Determine if the user is authorized to make this request.
      */

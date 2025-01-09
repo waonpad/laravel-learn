@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Gate;
 
 class UpdatePostRequest extends CustomFormRequest
 {
-    protected $content;
-
     /**
      * Determine if the user is authorized to make this request.
      */
