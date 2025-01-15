@@ -12,17 +12,30 @@ use Illuminate\Http\JsonResponse;
 
 class CustomFormRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
+     * Get the validation rules that apply to the request.
+     *
      * @return array<string, array<mixed>|string|ValidationRule>
      */
     public function rules(): array
     {
         return [];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function validationData(): array
+    {
+        return parent::validationData();
     }
 
     protected function failedValidation(Validator $validator): void
