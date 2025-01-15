@@ -15,17 +15,17 @@ class PostResource extends CustomJsonResource
     #[OA\Property(
         type: 'integer',
     )]
-    public int $id;
+    protected int $id;
 
     #[OA\Property(
         type: 'string',
     )]
-    public string $content;
+    protected string $content;
 
     #[OA\Property(
         type: 'integer',
     )]
-    public int $userId;
+    protected int $userId;
 
     public function toArray(Request $request): array
     {
