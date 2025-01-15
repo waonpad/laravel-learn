@@ -12,15 +12,16 @@ use Illuminate\Support\Facades\Gate;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
+    properties: [
+        new OA\Property(
+            property: 'content',
+            type: 'string',
+        ),
+    ],
     required: ['content'],
 )]
 class StorePostRequest extends CustomFormRequest
 {
-    #[OA\Property(
-        type: 'string',
-    )]
-    protected $content;
-
     public function authorize(): bool
     {
         return Gate::allows('create', [Post::class]);

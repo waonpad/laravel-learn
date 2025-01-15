@@ -18,7 +18,6 @@ use App\UseCases\Post\StorePostAction;
 use App\UseCases\Post\UpdatePostAction;
 use Illuminate\Http\Response;
 use OpenApi\Attributes as OA;
-use OpenApi\Attributes\JsonContent;
 
 class PostController extends Controller
 {
@@ -41,12 +40,12 @@ class PostController extends Controller
     #[OA\RequestBody(
         description: '',
         required: true,
-        content: new JsonContent(ref: '#/components/schemas/StorePostRequest')
+        content: new OA\JsonContent(ref: '#/components/schemas/StorePostRequest')
     )]
     #[OA\Response(
         response: 201,
         description: '',
-        content: new JsonContent(ref: '#/components/schemas/PostResource')
+        content: new OA\JsonContent(ref: '#/components/schemas/PostResource')
     )]
     public function store(StorePostRequest $request, StorePostAction $action): PostResource
     {
