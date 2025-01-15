@@ -9,9 +9,18 @@ use App\Http\Requests\CustomFormRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    required: ['content'],
+)]
 class StorePostRequest extends CustomFormRequest
 {
+    #[OA\Property(
+        type: 'string',
+    )]
+    protected $content;
+
     public function authorize(): bool
     {
         return Gate::allows('create', [Post::class]);

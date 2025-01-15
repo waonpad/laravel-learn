@@ -17,6 +17,8 @@ use App\UseCases\Post\ShowPostAction;
 use App\UseCases\Post\StorePostAction;
 use App\UseCases\Post\UpdatePostAction;
 use Illuminate\Http\Response;
+use OpenApi\Attributes as OA;
+use OpenApi\Attributes\JsonContent;
 
 class PostController extends Controller
 {
@@ -31,6 +33,21 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    #[OA\Post(
+        path: '/posts',
+        tags: ['Post'],
+        security: [['bearerAuth' => ['apiKey']]],
+    )]
+    #[OA\RequestBody(
+        description: '',
+        required: true,
+        content: new JsonContent(ref: '#/components/schemas/StorePostRequest')
+    )]
+    #[OA\Response(
+        response: 201,
+        description: '',
+        content: new JsonContent(ref: '#/components/schemas/PostResource')
+    )]
     public function store(StorePostRequest $request, StorePostAction $action): PostResource
     {
         $input = $request->makeInput();
