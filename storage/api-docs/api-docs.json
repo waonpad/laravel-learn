@@ -14,7 +14,6 @@
                 "summary": "Store a newly created resource in storage.",
                 "operationId": "c2e0b0e26215e6d34ece33ebae25f7df",
                 "requestBody": {
-                    "description": "",
                     "required": true,
                     "content": {
                         "application/json": {

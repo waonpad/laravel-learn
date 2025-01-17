@@ -36,16 +36,17 @@ class PostController extends Controller
         path: '/posts',
         tags: ['Post'],
         security: [['bearerAuth' => ['apiKey']]],
-    )]
-    #[OA\RequestBody(
-        description: '',
-        required: true,
-        content: new OA\JsonContent(ref: '#/components/schemas/StorePostRequest')
-    )]
-    #[OA\Response(
-        response: 201,
-        description: '',
-        content: new OA\JsonContent(ref: '#/components/schemas/PostResource')
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(ref: '#/components/schemas/StorePostRequest')
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: '',
+                content: new OA\JsonContent(ref: '#/components/schemas/PostResource')
+            ),
+        ],
     )]
     public function store(StorePostRequest $request, StorePostAction $action): PostResource
     {
