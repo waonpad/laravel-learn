@@ -13,8 +13,7 @@ use OpenApi\Attributes as OA;
 )]
 #[OA\SecurityScheme(
     securityScheme: 'bearerAuth',
-    type: 'apiKey',
-    in: 'header',
-    name: 'Authorization',
+    type: 'http',
+    scheme: 'bearer',
 )]
 class Swagger {}

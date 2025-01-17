@@ -55,7 +55,7 @@ class PostController extends Controller
     #[OA\Post(
         path: '/posts',
         tags: ['Post'],
-        security: [['bearerAuth' => ['apiKey']]],
+        security: [['bearerAuth' => true]],
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(ref: StorePostRequest::class),
@@ -113,7 +113,7 @@ class PostController extends Controller
     #[OA\Patch(
         path: '/posts/{id}',
         tags: ['Post'],
-        security: [['bearerAuth' => ['apiKey']]],
+        security: [['bearerAuth' => true]],
         parameters: [
             new OA\PathParameter(
                 name: 'id',
@@ -150,7 +150,7 @@ class PostController extends Controller
     #[OA\Delete(
         path: '/posts/{id}',
         tags: ['Post'],
-        security: [['bearerAuth' => ['apiKey']]],
+        security: [['bearerAuth' => true]],
         parameters: [
             new OA\PathParameter(
                 name: 'id',
