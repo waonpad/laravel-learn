@@ -1,0 +1,51 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Post;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\UpdatePostRequest;
+use App\Http\Resources\PostResource;
+use App\UseCases\Post\UpdatePostAction;
+use OpenApi\Attributes as OA;
+
+class UpdatePostController extends Controller
+{
+    /**
+     * Update the specified resource in storage.
+     */
+    #[OA\Patch(
+        path: '/posts/{id}',
+        tags: ['Post'],
+        security: [['bearerAuth' => true]],
+        parameters: [
+            new OA\PathParameter(
+                name: 'id',
+                schema: new OA\Schema(
+                    type: 'string',
+                ),
+                required: true,
+            ),
+        ],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(ref: UpdatePostRequest::class),
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: '',
+                content: new OA\JsonContent(ref: PostResource::class),
+            ),
+        ],
+    )]
+    public function __invoke(UpdatePostRequest $request, string $id, UpdatePostAction $action): PostResource
+    {
+        $input = $request->makeInput();
+
+        $stored = $action($id, $input);
+
+        return new PostResource($stored);
+    }
+}
