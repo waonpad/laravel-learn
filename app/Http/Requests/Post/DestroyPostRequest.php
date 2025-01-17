@@ -7,10 +7,7 @@ namespace App\Http\Requests\Post;
 use App\Http\Requests\CustomFormRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Gate;
-use OpenApi\Attributes as OA;
 
-#[OA\Schema(
-)]
 class DestroyPostRequest extends CustomFormRequest
 {
     public function authorize(): bool

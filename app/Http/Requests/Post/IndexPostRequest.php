@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Post;
 
 use App\Http\Requests\CustomFormRequest;
-use OpenApi\Attributes as OA;
 
-#[OA\Schema(
-)]
 class IndexPostRequest extends CustomFormRequest
 {
     public function authorize(): bool
