@@ -29,3 +29,6 @@ frankenphp
 frankenphp-worker.php
 
 coverage.xml
+
+# L5 Swagger
+/storage/api-docs
