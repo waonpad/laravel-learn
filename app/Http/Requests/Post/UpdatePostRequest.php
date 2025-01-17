@@ -8,7 +8,17 @@ use App\Http\DTO\Post\UpdatePostDto;
 use App\Http\Requests\CustomFormRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Gate;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    properties: [
+        new OA\Property(
+            property: 'content',
+            type: 'string',
+        ),
+    ],
+    required: ['content'],
+)]
 class UpdatePostRequest extends CustomFormRequest
 {
     public function authorize(): bool

@@ -6,7 +6,105 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    properties: [
+        new OA\Property(
+            property: 'links',
+            type: 'object',
+            properties: [
+                new OA\Property(
+                    property: 'first',
+                    type: 'string',
+                    format: 'uri',
+                ),
+                new OA\Property(
+                    property: 'last',
+                    type: 'string',
+                    format: 'uri',
+                ),
+                new OA\Property(
+                    property: 'prev',
+                    type: ['string', 'null'],
+                    format: 'uri',
+                ),
+                new OA\Property(
+                    property: 'next',
+                    type: ['string', 'null'],
+                    format: 'uri',
+                ),
+            ],
+            required: ['first', 'last', 'prev', 'next'],
+        ),
+        new OA\Property(
+            property: 'meta',
+            type: 'object',
+            properties: [
+                new OA\Property(
+                    property: 'currentPage',
+                    type: 'integer',
+                    example: 1,
+                ),
+                new OA\Property(
+                    property: 'from',
+                    type: 'integer',
+                    example: 1,
+                ),
+                new OA\Property(
+                    property: 'lastPage',
+                    type: 'integer',
+                    example: 10,
+                ),
+                new OA\Property(
+                    property: 'links',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'object',
+                        properties: [
+                            new OA\Property(
+                                property: 'url',
+                                type: ['string', 'null'],
+                                format: 'uri',
+                            ),
+                            new OA\Property(
+                                property: 'label',
+                                type: 'string',
+                            ),
+                            new OA\Property(
+                                property: 'active',
+                                type: 'boolean',
+                            ),
+                        ],
+                        required: ['url', 'label', 'active'],
+                    ),
+                ),
+                new OA\Property(
+                    property: 'path',
+                    type: 'string',
+                    format: 'uri',
+                ),
+                new OA\Property(
+                    property: 'perPage',
+                    type: 'integer',
+                    example: 10,
+                ),
+                new OA\Property(
+                    property: 'to',
+                    type: 'integer',
+                    example: 10,
+                ),
+                new OA\Property(
+                    property: 'total',
+                    type: 'integer',
+                    example: 100,
+                ),
+            ],
+            required: ['currentPage', 'from', 'lastPage', 'links', 'path', 'perPage', 'to', 'total'],
+        ),
+    ],
+    required: ['links', 'meta'],
+)]
 class CustomResourceCollection extends ResourceCollection
 {
     /**

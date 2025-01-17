@@ -24,6 +24,26 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
+    #[OA\Get(
+        path: '/posts',
+        tags: ['Post'],
+        parameters: [
+            new OA\QueryParameter(
+                name: 'page',
+                schema: new OA\Schema(
+                    type: 'integer',
+                ),
+                required: false,
+            ),
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: '',
+                content: new OA\JsonContent(ref: PostCollection::class),
+            ),
+        ],
+    )]
     public function index(IndexPostRequest $request, IndexPostAction $action): PostCollection
     {
         return new PostCollection($action());
@@ -38,13 +58,13 @@ class PostController extends Controller
         security: [['bearerAuth' => ['apiKey']]],
         requestBody: new OA\RequestBody(
             required: true,
-            content: new OA\JsonContent(ref: '#/components/schemas/StorePostRequest')
+            content: new OA\JsonContent(ref: StorePostRequest::class),
         ),
         responses: [
             new OA\Response(
                 response: 201,
                 description: '',
-                content: new OA\JsonContent(ref: '#/components/schemas/PostResource')
+                content: new OA\JsonContent(ref: PostResource::class),
             ),
         ],
     )]
@@ -54,13 +74,32 @@ class PostController extends Controller
 
         $stored = $action($input);
 
-        // @status 201
         return new PostResource($stored);
     }
 
     /**
      * Display the specified resource.
      */
+    #[OA\Get(
+        path: '/posts/{id}',
+        tags: ['Post'],
+        parameters: [
+            new OA\PathParameter(
+                name: 'id',
+                schema: new OA\Schema(
+                    type: 'string',
+                ),
+                required: true,
+            ),
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: '',
+                content: new OA\JsonContent(ref: PostResource::class),
+            ),
+        ],
+    )]
     public function show(ShowPostRequest $request, string $id, ShowPostAction $action): PostResource
     {
         $post = $action($id);
@@ -71,6 +110,31 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    #[OA\Patch(
+        path: '/posts/{id}',
+        tags: ['Post'],
+        security: [['bearerAuth' => ['apiKey']]],
+        parameters: [
+            new OA\PathParameter(
+                name: 'id',
+                schema: new OA\Schema(
+                    type: 'string',
+                ),
+                required: true,
+            ),
+        ],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(ref: UpdatePostRequest::class),
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: '',
+                content: new OA\JsonContent(ref: PostResource::class),
+            ),
+        ],
+    )]
     public function update(UpdatePostRequest $request, string $id, UpdatePostAction $action): PostResource
     {
         $input = $request->makeInput();
@@ -83,6 +147,26 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    #[OA\Delete(
+        path: '/posts/{id}',
+        tags: ['Post'],
+        security: [['bearerAuth' => ['apiKey']]],
+        parameters: [
+            new OA\PathParameter(
+                name: 'id',
+                schema: new OA\Schema(
+                    type: 'string',
+                ),
+                required: true,
+            ),
+        ],
+        responses: [
+            new OA\Response(
+                response: 204,
+                description: '',
+            ),
+        ],
+    )]
     public function destroy(DestroyPostRequest $request, string $id, DestroyPostAction $action): Response
     {
         $action($id);
