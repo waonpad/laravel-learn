@@ -5,7 +5,30 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    properties: [
+        new OA\Property(
+            property: 'id',
+            type: 'integer',
+        ),
+        new OA\Property(
+            property: 'name',
+            type: 'string',
+        ),
+        new OA\Property(
+            property: 'email',
+            type: 'string',
+            format: 'email',
+        ),
+        new OA\Property(
+            property: 'emailVerifiedAt',
+            type: 'string',
+        ),
+    ],
+    required: ['id', 'name', 'email', 'emailVerifiedAt'],
+)]
 class UserResource extends CustomJsonResource
 {
     public int $id;

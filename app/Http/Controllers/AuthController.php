@@ -9,10 +9,34 @@ use App\Http\Resources\UserResource;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use OpenApi\Attributes as OA;
 
 class AuthController extends Controller
 {
+    #[OA\Post(
+        path: '/login',
+        tags: ['Auth'],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(ref: LoginRequest::class)
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: '',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(
+                            property: 'token',
+                            type: 'string',
+                        ),
+                    ]
+                )
+            ),
+        ]
+    )]
     public function login(LoginRequest $request): JsonResponse
     {
         $input = $request->makeInput();
@@ -32,15 +56,38 @@ class AuthController extends Controller
         throw new AuthenticationException();
     }
 
+    #[OA\Get(
+        path: '/user',
+        tags: ['Auth'],
+        security: [['bearerAuth' => ['apiKey']]],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: '',
+                content: new OA\JsonContent(ref: UserResource::class)
+            ),
+        ]
+    )]
     public function user(Request $request): UserResource
     {
         return new UserResource($request->user());
     }
 
-    public function logout(Request $request): JsonResponse
+    #[OA\Post(
+        path: '/logout',
+        tags: ['Auth'],
+        security: [['bearerAuth' => ['apiKey']]],
+        responses: [
+            new OA\Response(
+                response: 204,
+                description: '',
+            ),
+        ]
+    )]
+    public function logout(Request $request): Response
     {
         $request->user()->currentAccessToken()->delete();
 
-        return new JsonResponse(['message' => 'Logged out'], 200);
+        return response()->noContent();
     }
 }
