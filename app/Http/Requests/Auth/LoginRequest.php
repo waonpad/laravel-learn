@@ -13,10 +13,12 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: 'email',
             type: 'string',
+            example: 'test@example.com',
         ),
         new OA\Property(
             property: 'password',
             type: 'string',
+            example: 'password',
         ),
     ],
     required: ['email', 'password'],
