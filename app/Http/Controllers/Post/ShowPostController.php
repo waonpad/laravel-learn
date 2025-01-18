@@ -33,6 +33,11 @@ class ShowPostController extends Controller
                 description: '',
                 content: new OA\JsonContent(ref: PostResource::class),
             ),
+            new OA\Response(
+                response: 400,
+                description: '',
+                content: new OA\JsonContent(ref: '#/components/schemas/ShowPostRequestPathValidationError'),
+            ),
         ],
     )]
     public function __invoke(ShowPostRequest $request, string $id, ShowPostAction $action): PostResource

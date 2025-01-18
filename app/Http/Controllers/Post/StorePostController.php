@@ -29,6 +29,11 @@ class StorePostController extends Controller
                 description: '',
                 content: new OA\JsonContent(ref: PostResource::class),
             ),
+            new OA\Response(
+                response: 422,
+                description: '',
+                content: new OA\JsonContent(ref: '#/components/schemas/StorePostRequestBodyValidationError'),
+            ),
         ],
     )]
     public function __invoke(StorePostRequest $request, StorePostAction $action): PostResource

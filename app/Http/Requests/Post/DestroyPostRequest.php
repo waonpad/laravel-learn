@@ -6,10 +6,17 @@ namespace App\Http\Requests\Post;
 
 use App\Http\Requests\CustomFormRequest;
 use App\Models\Post;
+use App\OpenApi\Attributes\ValidationErrorSchema;
 use Illuminate\Support\Facades\Gate;
 
 class DestroyPostRequest extends CustomFormRequest
 {
+    #[ValidationErrorSchema(
+        schema: 'DestroyPostRequestPathValidationError',
+        validationErrorProperties: ['path.id'],
+    )]
+    public null $__attributesAnchor;
+
     public function authorize(): bool
     {
         $post = Post::findOrFail($this->route('id'));

@@ -38,6 +38,16 @@ class UpdatePostController extends Controller
                 description: '',
                 content: new OA\JsonContent(ref: PostResource::class),
             ),
+            new OA\Response(
+                response: 400,
+                description: '',
+                content: new OA\JsonContent(ref: '#/components/schemas/UpdatePostRequestPathValidationError'),
+            ),
+            new OA\Response(
+                response: 422,
+                description: '',
+                content: new OA\JsonContent(ref: '#/components/schemas/UpdatePostRequestBodyValidationError'),
+            ),
         ],
     )]
     public function __invoke(UpdatePostRequest $request, string $id, UpdatePostAction $action): PostResource

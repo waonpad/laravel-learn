@@ -13,6 +13,11 @@ use Illuminate\Http\JsonResponse;
 class CustomFormRequest extends FormRequest
 {
     /**
+     * 解析用のAttributesを付与するためのプロパティ.
+     */
+    public null $__attributesAnchor;
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool

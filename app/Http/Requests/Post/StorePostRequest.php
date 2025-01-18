@@ -7,6 +7,7 @@ namespace App\Http\Requests\Post;
 use App\Http\DTO\Post\StorePostDto;
 use App\Http\Requests\CustomFormRequest;
 use App\Models\Post;
+use App\OpenApi\Attributes\ValidationErrorSchema;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use OpenApi\Attributes as OA;
@@ -22,6 +23,12 @@ use OpenApi\Attributes as OA;
 )]
 class StorePostRequest extends CustomFormRequest
 {
+    #[ValidationErrorSchema(
+        schema: 'StorePostRequestBodyValidationError',
+        validationErrorProperties: ['content'],
+    )]
+    public null $__attributesAnchor;
+
     public function authorize(): bool
     {
         return Gate::allows('create', [Post::class]);
