@@ -8,11 +8,6 @@ use App\Http\Requests\CustomFormRequest;
 
 class IndexPostRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [

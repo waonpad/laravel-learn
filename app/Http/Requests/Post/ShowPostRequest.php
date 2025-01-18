@@ -8,11 +8,6 @@ use App\Http\Requests\CustomFormRequest;
 
 class ShowPostRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
