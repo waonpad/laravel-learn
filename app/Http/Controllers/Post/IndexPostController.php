@@ -38,6 +38,10 @@ class IndexPostController extends Controller
                 description: '',
                 content: new OA\JsonContent(ref: '#/components/schemas/IndexPostRequestQueryValidationError'),
             ),
+            new OA\Response(
+                response: 500,
+                ref: '#/components/responses/500',
+            ),
         ],
     )]
     public function __invoke(IndexPostRequest $request, IndexPostAction $action): PostCollection

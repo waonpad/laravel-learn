@@ -38,6 +38,18 @@ class DestroyPostController extends Controller
                 description: '',
                 content: new OA\JsonContent(ref: '#/components/schemas/DestroyPostRequestPathValidationError'),
             ),
+            new OA\Response(
+                response: 401,
+                ref: '#/components/responses/401',
+            ),
+            new OA\Response(
+                response: 403,
+                ref: '#/components/responses/403',
+            ),
+            new OA\Response(
+                response: 500,
+                ref: '#/components/responses/500',
+            ),
         ],
     )]
     public function __invoke(DestroyPostRequest $request, string $id, DestroyPostAction $action): Response

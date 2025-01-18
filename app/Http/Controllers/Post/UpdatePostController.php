@@ -44,9 +44,21 @@ class UpdatePostController extends Controller
                 content: new OA\JsonContent(ref: '#/components/schemas/UpdatePostRequestPathValidationError'),
             ),
             new OA\Response(
+                response: 401,
+                ref: '#/components/responses/401'
+            ),
+            new OA\Response(
+                response: 403,
+                ref: '#/components/responses/403'
+            ),
+            new OA\Response(
                 response: 422,
                 description: '',
                 content: new OA\JsonContent(ref: '#/components/schemas/UpdatePostRequestBodyValidationError'),
+            ),
+            new OA\Response(
+                response: 500,
+                ref: '#/components/responses/500'
             ),
         ],
     )]
