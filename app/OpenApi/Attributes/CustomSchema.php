@@ -7,6 +7,7 @@ namespace App\OpenApi\Attributes;
 use OpenApi\Attributes as OAA;
 use OpenApi\Generator;
 
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY | \Attribute::IS_REPEATABLE)]
 class CustomSchema extends OAA\Schema
 {
     public function __construct(
