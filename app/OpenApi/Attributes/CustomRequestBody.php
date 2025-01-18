@@ -6,6 +6,7 @@ namespace App\OpenApi\Attributes;
 
 use OpenApi\Attributes as OAA;
 
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY | \Attribute::TARGET_PARAMETER | \Attribute::IS_REPEATABLE)]
 class CustomRequestBody extends OAA\RequestBody
 {
     public function __construct(
