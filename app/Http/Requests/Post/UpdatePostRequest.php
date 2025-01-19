@@ -7,7 +7,6 @@ namespace App\Http\Requests\Post;
 use App\Http\DTO\Post\UpdatePostDto;
 use App\Http\Requests\CustomFormRequest;
 use App\Models\Post;
-use App\OpenApi\Attributes\ValidationErrorSchema;
 use Illuminate\Support\Facades\Gate;
 use OpenApi\Attributes as OA;
 
@@ -22,11 +21,11 @@ use OpenApi\Attributes as OA;
 )]
 class UpdatePostRequest extends CustomFormRequest
 {
-    #[ValidationErrorSchema(
+    #[OA\ValidationErrorSchema(
         schema: 'UpdatePostRequestBodyValidationError',
         validationErrorProperties: ['content'],
     )]
-    #[ValidationErrorSchema(
+    #[OA\ValidationErrorSchema(
         schema: 'UpdatePostRequestPathValidationError',
         validationErrorProperties: ['path.id'],
     )]

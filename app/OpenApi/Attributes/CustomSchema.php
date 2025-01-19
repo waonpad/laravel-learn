@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\OpenApi\Attributes;
+namespace OpenApi\Attributes;
 
-use OpenApi\Attributes as OAA;
 use OpenApi\Generator;
 
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY | \Attribute::IS_REPEATABLE)]
-class CustomSchema extends OAA\Schema
+class CustomSchema extends Schema
 {
     public function __construct(
         // schema
@@ -22,7 +21,7 @@ class CustomSchema extends OAA\Schema
         ?array $properties = null,
         null|array|string $type = null,
         ?string $format = null,
-        ?OAA\Items $items = null,
+        ?Items $items = null,
         ?string $collectionFormat = null,
         mixed $default = Generator::UNDEFINED,
         $maximum = null,
@@ -36,11 +35,11 @@ class CustomSchema extends OAA\Schema
         ?bool $uniqueItems = null,
         ?string $pattern = null,
         null|array|string $enum = null,
-        ?OAA\Discriminator $discriminator = null,
+        ?Discriminator $discriminator = null,
         ?bool $readOnly = null,
         ?bool $writeOnly = null,
-        ?OAA\Xml $xml = null,
-        ?OAA\ExternalDocumentation $externalDocs = null,
+        ?Xml $xml = null,
+        ?ExternalDocumentation $externalDocs = null,
         mixed $example = Generator::UNDEFINED,
         ?array $examples = null,
         ?bool $nullable = null,
@@ -48,7 +47,7 @@ class CustomSchema extends OAA\Schema
         ?array $allOf = null,
         ?array $anyOf = null,
         ?array $oneOf = null,
-        null|bool|OAA\AdditionalProperties $additionalProperties = null,
+        null|AdditionalProperties|bool $additionalProperties = null,
         mixed $const = Generator::UNDEFINED,
         // annotation
         ?array $x = null,

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Requests\Post;
 
 use App\Http\Requests\CustomFormRequest;
-use App\OpenApi\Attributes\ValidationErrorSchema;
+use OpenApi\Attributes as OA;
 
 class IndexPostRequest extends CustomFormRequest
 {
-    #[ValidationErrorSchema(
+    #[OA\ValidationErrorSchema(
         schema: 'IndexPostRequestQueryValidationError',
         validationErrorProperties: ['query.page'],
     )]

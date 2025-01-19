@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\OpenApi\Attributes;
+namespace OpenApi\Attributes;
 
-use OpenApi\Attributes as OAA;
 use OpenApi\Generator;
 
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY | \Attribute::IS_REPEATABLE)]
-class ValidationErrorSchema extends OAA\Schema
+class ValidationErrorSchema extends Schema
 {
     /**
      * @param list<string> $validationErrorProperties
@@ -44,7 +43,7 @@ class ValidationErrorSchema extends OAA\Schema
         ?bool $readOnly = null,
         ?bool $writeOnly = null,
         // ?OAA\Xml $xml = null,
-        ?OAA\ExternalDocumentation $externalDocs = null,
+        ?ExternalDocumentation $externalDocs = null,
         mixed $example = Generator::UNDEFINED,
         ?array $examples = null,
         // ?bool $nullable = null,
@@ -59,15 +58,15 @@ class ValidationErrorSchema extends OAA\Schema
         ?array $attachables = null,
     ) {
         $properties = [
-            new OAA\Property(
+            new Property(
                 property: 'message',
                 type: 'string',
             ),
-            new OAA\Property(
+            new Property(
                 property: 'errors',
                 type: 'object',
                 properties: array_map(
-                    fn (string $validationErrorProperty) => new OAA\Property(property: $validationErrorProperty, type: 'string'),
+                    fn (string $validationErrorProperty) => new Property(property: $validationErrorProperty, type: 'string'),
                     $validationErrorProperties
                 )
             ),
