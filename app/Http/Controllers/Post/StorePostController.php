@@ -6,9 +6,13 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
+use App\Http\Requests\Post\StorePostRequestBodyValidationError;
 use App\Http\Resources\PostResource;
 use App\UseCases\Post\StorePostAction;
 use OpenApi\Attributes as OA;
+use OpenApi\SchemaDefinitions\Responses\Forbidden;
+use OpenApi\SchemaDefinitions\Responses\InternalServerError;
+use OpenApi\SchemaDefinitions\Responses\Unauthorized;
 
 class StorePostController extends Controller
 {
@@ -30,22 +34,13 @@ class StorePostController extends Controller
                 content: new OA\JsonContent(ref: PostResource::class),
             ),
             new OA\Response(
-                response: 401,
-                ref: '#/components/responses/401',
-            ),
-            new OA\Response(
-                response: 403,
-                ref: '#/components/responses/403',
-            ),
-            new OA\Response(
                 response: 422,
                 description: '',
-                content: new OA\JsonContent(ref: '#/components/schemas/StorePostRequestBodyValidationError'),
+                content: new OA\JsonContent(ref: StorePostRequestBodyValidationError::class),
             ),
-            new OA\Response(
-                response: 500,
-                ref: '#/components/responses/500',
-            ),
+            new OA\Response(response: 401, ref: Unauthorized::class),
+            new OA\Response(response: 403, ref: Forbidden::class),
+            new OA\Response(response: 500, ref: InternalServerError::class),
         ],
     )]
     public function __invoke(StorePostRequest $request, StorePostAction $action): PostResource

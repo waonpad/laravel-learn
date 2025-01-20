@@ -10,6 +10,9 @@
         "psr-4": {
             "OpenApi\\": "app/OpenApi/"
         },
+        "classmap": [
+            "app/OpenApi/SchemaDefinitions/",
+        ]
     }
 }
 ```
@@ -20,4 +23,17 @@
 <?php
 
 namespace OpenApi\...;
+```
+
+## SchemaDefinitionsディレクトリについて
+
+- 共通して参照されるスキーマを定義するためのディレクトリ
+- 作業を楽にするため、PSR-4に準拠せず、1ファイルに複数のクラスを定義
+
+### クラス追加/削除時の注意点
+
+classmapによるオートロードのため、クラスを追加/削除した場合は以下のコマンドを実行
+
+```bash
+composer dump-autoload
 ```

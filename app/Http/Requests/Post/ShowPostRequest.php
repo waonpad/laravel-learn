@@ -9,12 +9,6 @@ use OpenApi\Attributes as OA;
 
 class ShowPostRequest extends CustomFormRequest
 {
-    #[OA\ValidationErrorSchema(
-        schema: 'ShowPostRequestPathValidationError',
-        validationErrorProperties: ['path.id'],
-    )]
-    public null $__attributesAnchor;
-
     public function rules(): array
     {
         return [
@@ -33,3 +27,8 @@ class ShowPostRequest extends CustomFormRequest
         return $data;
     }
 }
+
+#[OA\ValidationErrorSchema(
+    validationErrorProperties: ['path.id'],
+)]
+class ShowPostRequestPathValidationError {}

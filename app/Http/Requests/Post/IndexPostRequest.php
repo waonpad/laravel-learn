@@ -9,12 +9,6 @@ use OpenApi\Attributes as OA;
 
 class IndexPostRequest extends CustomFormRequest
 {
-    #[OA\ValidationErrorSchema(
-        schema: 'IndexPostRequestQueryValidationError',
-        validationErrorProperties: ['query.page'],
-    )]
-    public null $__attributesAnchor;
-
     public function rules(): array
     {
         return [
@@ -33,3 +27,8 @@ class IndexPostRequest extends CustomFormRequest
         return $data;
     }
 }
+
+#[OA\ValidationErrorSchema(
+    validationErrorProperties: ['query.page'],
+)]
+class IndexPostRequestQueryValidationError {}

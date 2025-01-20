@@ -11,12 +11,6 @@ use OpenApi\Attributes as OA;
 
 class DestroyPostRequest extends CustomFormRequest
 {
-    #[OA\ValidationErrorSchema(
-        schema: 'DestroyPostRequestPathValidationError',
-        validationErrorProperties: ['path.id'],
-    )]
-    public null $__attributesAnchor;
-
     public function authorize(): bool
     {
         $post = Post::findOrFail($this->route('id'));
@@ -42,3 +36,8 @@ class DestroyPostRequest extends CustomFormRequest
         return $data;
     }
 }
+
+#[OA\ValidationErrorSchema(
+    validationErrorProperties: ['path.id'],
+)]
+class DestroyPostRequestPathValidationError {}

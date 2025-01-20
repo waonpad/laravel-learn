@@ -21,16 +21,6 @@ use OpenApi\Attributes as OA;
 )]
 class UpdatePostRequest extends CustomFormRequest
 {
-    #[OA\ValidationErrorSchema(
-        schema: 'UpdatePostRequestBodyValidationError',
-        validationErrorProperties: ['content'],
-    )]
-    #[OA\ValidationErrorSchema(
-        schema: 'UpdatePostRequestPathValidationError',
-        validationErrorProperties: ['path.id'],
-    )]
-    public null $__attributesAnchor;
-
     public function authorize(): bool
     {
         $post = Post::findOrFail($this->route('id'));
@@ -66,3 +56,13 @@ class UpdatePostRequest extends CustomFormRequest
         ]);
     }
 }
+
+#[OA\ValidationErrorSchema(
+    validationErrorProperties: ['content'],
+)]
+class UpdatePostRequestBodyValidationError {}
+
+#[OA\ValidationErrorSchema(
+    validationErrorProperties: ['path.id'],
+)]
+class UpdatePostRequestPathValidationError {}

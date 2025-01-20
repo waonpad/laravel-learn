@@ -6,9 +6,14 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\DestroyPostRequest;
+use App\Http\Requests\Post\DestroyPostRequestPathValidationError;
 use App\UseCases\Post\DestroyPostAction;
 use Illuminate\Http\Response;
 use OpenApi\Attributes as OA;
+use OpenApi\SchemaDefinitions\PathParameters\PostId;
+use OpenApi\SchemaDefinitions\Responses\Forbidden;
+use OpenApi\SchemaDefinitions\Responses\InternalServerError;
+use OpenApi\SchemaDefinitions\Responses\Unauthorized;
 
 class DestroyPostController extends Controller
 {
@@ -20,36 +25,18 @@ class DestroyPostController extends Controller
         tags: ['Post'],
         security: [['bearerAuth' => true]],
         parameters: [
-            new OA\PathParameter(
-                name: 'id',
-                schema: new OA\Schema(
-                    type: 'string',
-                ),
-                required: true,
-            ),
+            new OA\PathParameter(ref: PostId::REF),
         ],
         responses: [
-            new OA\Response(
-                response: 204,
-                description: '',
-            ),
+            new OA\Response(response: 204, description: ''),
             new OA\Response(
                 response: 400,
                 description: '',
-                content: new OA\JsonContent(ref: '#/components/schemas/DestroyPostRequestPathValidationError'),
+                content: new OA\JsonContent(ref: DestroyPostRequestPathValidationError::class),
             ),
-            new OA\Response(
-                response: 401,
-                ref: '#/components/responses/401',
-            ),
-            new OA\Response(
-                response: 403,
-                ref: '#/components/responses/403',
-            ),
-            new OA\Response(
-                response: 500,
-                ref: '#/components/responses/500',
-            ),
+            new OA\Response(response: 401, ref: Unauthorized::class),
+            new OA\Response(response: 403, ref: Forbidden::class),
+            new OA\Response(response: 500, ref: InternalServerError::class),
         ],
     )]
     public function __invoke(DestroyPostRequest $request, string $id, DestroyPostAction $action): Response

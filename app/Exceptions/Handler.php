@@ -8,34 +8,8 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use OpenApi\Attributes as OA;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-#[OA\Schema(
-    schema: 'Error',
-    properties: [
-        new OA\Property(
-            property: 'message',
-            type: 'string',
-        ),
-    ],
-    required: ['message'],
-)]
-#[OA\Response(
-    response: 401,
-    description: '',
-    content: new OA\JsonContent(ref: '#/components/schemas/Error'),
-)]
-#[OA\Response(
-    response: 403,
-    description: '',
-    content: new OA\JsonContent(ref: '#/components/schemas/Error'),
-)]
-#[OA\Response(
-    response: 500,
-    description: '',
-    content: new OA\JsonContent(ref: '#/components/schemas/Error'),
-)]
 class Handler
 {
     public function handleExceptions(Exceptions $exceptions): void

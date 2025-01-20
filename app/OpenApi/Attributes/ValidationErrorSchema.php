@@ -6,7 +6,7 @@ namespace OpenApi\Attributes;
 
 use OpenApi\Generator;
 
-#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY | \Attribute::IS_REPEATABLE)]
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY | \Attribute::IS_REPEATABLE | \Attribute::TARGET_CLASS_CONSTANT)]
 class ValidationErrorSchema extends Schema
 {
     /**

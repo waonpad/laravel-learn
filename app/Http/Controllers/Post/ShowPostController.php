@@ -6,9 +6,12 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\ShowPostRequest;
+use App\Http\Requests\Post\ShowPostRequestPathValidationError;
 use App\Http\Resources\PostResource;
 use App\UseCases\Post\ShowPostAction;
 use OpenApi\Attributes as OA;
+use OpenApi\SchemaDefinitions\PathParameters\PostId;
+use OpenApi\SchemaDefinitions\Responses\InternalServerError;
 
 class ShowPostController extends Controller
 {
@@ -19,13 +22,7 @@ class ShowPostController extends Controller
         path: '/posts/{id}',
         tags: ['Post'],
         parameters: [
-            new OA\PathParameter(
-                name: 'id',
-                schema: new OA\Schema(
-                    type: 'string',
-                ),
-                required: true,
-            ),
+            new OA\PathParameter(ref: PostId::REF),
         ],
         responses: [
             new OA\Response(
@@ -36,12 +33,9 @@ class ShowPostController extends Controller
             new OA\Response(
                 response: 400,
                 description: '',
-                content: new OA\JsonContent(ref: '#/components/schemas/ShowPostRequestPathValidationError'),
+                content: new OA\JsonContent(ref: ShowPostRequestPathValidationError::class),
             ),
-            new OA\Response(
-                response: 500,
-                ref: '#/components/responses/500',
-            ),
+            new OA\Response(response: 500, ref: InternalServerError::class),
         ],
     )]
     public function __invoke(ShowPostRequest $request, string $id, ShowPostAction $action): PostResource

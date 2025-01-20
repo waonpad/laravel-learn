@@ -22,12 +22,6 @@ use OpenApi\Attributes as OA;
 )]
 class StorePostRequest extends CustomFormRequest
 {
-    #[OA\ValidationErrorSchema(
-        schema: 'StorePostRequestBodyValidationError',
-        validationErrorProperties: ['content'],
-    )]
-    public null $__attributesAnchor;
-
     public function authorize(): bool
     {
         return Gate::allows('create', [Post::class]);
@@ -50,3 +44,8 @@ class StorePostRequest extends CustomFormRequest
         ]);
     }
 }
+
+#[OA\ValidationErrorSchema(
+    validationErrorProperties: ['content'],
+)]
+class StorePostRequestBodyValidationError {}
