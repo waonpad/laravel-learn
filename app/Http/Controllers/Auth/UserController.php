@@ -16,7 +16,7 @@ class UserController extends Controller
     #[OA\Get(
         path: '/user',
         tags: ['Auth'],
-        security: [['bearerAuth' => ['apiKey']]],
+        security: [['bearerAuth' => []]],
         responses: [
             new OA\Response(
                 response: 200,

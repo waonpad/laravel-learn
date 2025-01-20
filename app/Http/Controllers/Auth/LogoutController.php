@@ -16,7 +16,7 @@ class LogoutController extends Controller
     #[OA\Post(
         path: '/logout',
         tags: ['Auth'],
-        security: [['bearerAuth' => ['apiKey']]],
+        security: [['bearerAuth' => []]],
         responses: [
             new OA\Response(
                 response: 204,

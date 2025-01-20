@@ -24,7 +24,7 @@ class UpdatePostController extends Controller
     #[OA\Patch(
         path: '/posts/{id}',
         tags: ['Post'],
-        security: [['bearerAuth' => true]],
+        security: [['bearerAuth' => []]],
         parameters: [
             new OA\PathParameter(ref: PostId::REF),
         ],

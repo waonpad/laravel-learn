@@ -23,7 +23,7 @@ class DestroyPostController extends Controller
     #[OA\Delete(
         path: '/posts/{id}',
         tags: ['Post'],
-        security: [['bearerAuth' => true]],
+        security: [['bearerAuth' => []]],
         parameters: [
             new OA\PathParameter(ref: PostId::REF),
         ],

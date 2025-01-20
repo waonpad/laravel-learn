@@ -22,7 +22,7 @@ class StorePostController extends Controller
     #[OA\Post(
         path: '/posts',
         tags: ['Post'],
-        security: [['bearerAuth' => true]],
+        security: [['bearerAuth' => []]],
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(ref: StorePostRequest::class),
