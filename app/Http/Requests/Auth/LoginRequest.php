@@ -25,11 +25,6 @@ use OpenApi\Attributes as OA;
 )]
 class LoginRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -48,3 +43,8 @@ class LoginRequest extends CustomFormRequest
         ]);
     }
 }
+
+#[OA\ValidationErrorSchema(
+    validationErrorProperties: ['email', 'password'],
+)]
+class LoginRequestBodyValidationError {}

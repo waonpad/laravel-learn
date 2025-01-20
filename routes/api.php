@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\Post\DestroyPostController;
 use App\Http\Controllers\Post\IndexPostController;
@@ -32,6 +34,6 @@ Route::prefix('posts')->group(function (): void {
     Route::delete('/{id}', DestroyPostController::class)->middleware('auth:sanctum');
 });
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/login', LoginController::class);
+Route::get('/user', UserController::class)->middleware('auth:sanctum');
+Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');

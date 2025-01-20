@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Requests\Auth\LoginRequestBodyValidationError;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OA;
+use OpenApi\SchemaDefinitions\Responses\InternalServerError;
+use OpenApi\SchemaDefinitions\Responses\Unauthorized;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
     #[OA\Post(
         path: '/login',
@@ -35,9 +36,16 @@ class AuthController extends Controller
                     ]
                 )
             ),
+            new OA\Response(
+                response: 422,
+                description: '',
+                content: new OA\JsonContent(ref: LoginRequestBodyValidationError::class)
+            ),
+            new OA\Response(response: 401, ref: Unauthorized::class),
+            new OA\Response(response: 500, ref: InternalServerError::class),
         ]
     )]
-    public function login(LoginRequest $request): JsonResponse
+    public function __invoke(LoginRequest $request): JsonResponse
     {
         $input = $request->makeInput();
 
@@ -54,40 +62,5 @@ class AuthController extends Controller
         }
 
         throw new AuthenticationException();
-    }
-
-    #[OA\Get(
-        path: '/user',
-        tags: ['Auth'],
-        security: [['bearerAuth' => ['apiKey']]],
-        responses: [
-            new OA\Response(
-                response: 200,
-                description: '',
-                content: new OA\JsonContent(ref: UserResource::class)
-            ),
-        ]
-    )]
-    public function user(Request $request): UserResource
-    {
-        return new UserResource($request->user());
-    }
-
-    #[OA\Post(
-        path: '/logout',
-        tags: ['Auth'],
-        security: [['bearerAuth' => ['apiKey']]],
-        responses: [
-            new OA\Response(
-                response: 204,
-                description: '',
-            ),
-        ]
-    )]
-    public function logout(Request $request): Response
-    {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->noContent();
     }
 }
