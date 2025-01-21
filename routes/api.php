@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Auth\ShowAuthUserController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\Post\DestroyPostController;
 use App\Http\Controllers\Post\IndexPostController;
@@ -35,5 +35,5 @@ Route::prefix('posts')->group(function (): void {
 });
 
 Route::post('/login', LoginController::class);
-Route::get('/user', UserController::class)->middleware('auth:sanctum');
+Route::get('/user', ShowAuthUserController::class)->middleware('auth:sanctum');
 Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');

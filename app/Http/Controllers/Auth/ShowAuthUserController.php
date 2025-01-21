@@ -11,7 +11,7 @@ use OpenApi\Attributes as OA;
 use OpenApi\SchemaDefinitions\Responses\InternalServerError;
 use OpenApi\SchemaDefinitions\Responses\Unauthorized;
 
-class UserController extends Controller
+class ShowAuthUserController extends Controller
 {
     #[OA\Get(
         path: '/user',
