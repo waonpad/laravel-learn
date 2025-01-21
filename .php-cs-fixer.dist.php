@@ -11,6 +11,7 @@ return (new Config())
     // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer?tab=readme-ov-file#usage
     ->setRules([
         '@PhpCsFixer' => true,
+        'declare_strict_types' => true,
     ])
     ->setFinder(
         Finder::create()
