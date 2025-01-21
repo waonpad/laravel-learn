@@ -21,6 +21,7 @@ class DestroyPostController extends Controller
      * Remove the specified resource from storage.
      */
     #[OA\Delete(
+        operationId: 'deletePost',
         path: '/posts/{id}',
         tags: ['Post'],
         security: [['bearerAuth' => []]],

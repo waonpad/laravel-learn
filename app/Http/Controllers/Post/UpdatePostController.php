@@ -22,6 +22,7 @@ class UpdatePostController extends Controller
      * Update the specified resource in storage.
      */
     #[OA\Patch(
+        operationId: 'updatePost',
         path: '/posts/{id}',
         tags: ['Post'],
         security: [['bearerAuth' => []]],

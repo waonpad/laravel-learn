@@ -19,6 +19,7 @@ class ShowPostController extends Controller
      * Display the specified resource.
      */
     #[OA\Get(
+        operationId: 'getPost',
         path: '/posts/{id}',
         tags: ['Post'],
         parameters: [

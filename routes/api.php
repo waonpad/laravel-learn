@@ -35,5 +35,5 @@ Route::prefix('posts')->group(function (): void {
 });
 
 Route::post('/login', LoginController::class);
-Route::get('/user', ShowAuthUserController::class)->middleware('auth:sanctum');
+Route::get('/me', ShowAuthUserController::class)->middleware('auth:sanctum');
 Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');

@@ -19,6 +19,7 @@ class IndexPostController extends Controller
      * Display a listing of the resource.
      */
     #[OA\Get(
+        operationId: 'getPosts',
         path: '/posts',
         tags: ['Post'],
         parameters: [

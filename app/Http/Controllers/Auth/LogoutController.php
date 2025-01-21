@@ -14,6 +14,7 @@ use OpenApi\SchemaDefinitions\Responses\Unauthorized;
 class LogoutController extends Controller
 {
     #[OA\Post(
+        operationId: 'logout',
         path: '/logout',
         tags: ['Auth'],
         security: [['bearerAuth' => []]],

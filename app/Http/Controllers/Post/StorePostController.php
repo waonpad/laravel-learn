@@ -20,6 +20,7 @@ class StorePostController extends Controller
      * Store a newly created resource in storage.
      */
     #[OA\Post(
+        operationId: 'createPost',
         path: '/posts',
         tags: ['Post'],
         security: [['bearerAuth' => []]],

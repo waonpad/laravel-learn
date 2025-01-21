@@ -17,6 +17,7 @@ use OpenApi\SchemaDefinitions\Responses\Unauthorized;
 class LoginController extends Controller
 {
     #[OA\Post(
+        operationId: 'login',
         path: '/login',
         tags: ['Auth'],
         requestBody: new OA\RequestBody(

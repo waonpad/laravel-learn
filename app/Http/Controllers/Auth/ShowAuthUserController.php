@@ -14,7 +14,8 @@ use OpenApi\SchemaDefinitions\Responses\Unauthorized;
 class ShowAuthUserController extends Controller
 {
     #[OA\Get(
-        path: '/user',
+        operationId: 'getAuthUser',
+        path: '/me',
         tags: ['Auth'],
         security: [['bearerAuth' => []]],
         responses: [
